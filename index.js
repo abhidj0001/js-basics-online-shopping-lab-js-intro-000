@@ -9,13 +9,13 @@ function setCart(c) {
 }
 
 function addToCart(item) {
-  const price = Math.floor(Math.random() * 100)
-
-  cart.push({ [item]: price })
-
-  console.log(`${item} has been added to your cart.`)
-
-  return cart
+ // write your code here
+  var itemName = item
+  var itemPrice = Math.floor(Math.random() * 100)
+  // key names are assigned in this statement and not declared variables
+  var newItem = { itemName: itemName,  itemPrice: itemPrice }
+  getCart().push(newItem)
+  return `${newItem.itemName} has been added to your cart.`
 }
 
 function viewCart() {
