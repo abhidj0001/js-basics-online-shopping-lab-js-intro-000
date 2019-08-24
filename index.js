@@ -19,24 +19,24 @@ function addToCart(item) {
 }
 
 function viewCart() {
-  const l = cart.length
-
-  if (!l) {
-    return console.log("Your shopping cart is empty.")
+  // write your code here
+  var cartItems = new Array()
+  for (var item in cart ) {
+    cartItems.push(`${cart[item].itemName} at $${cart[item].itemPrice}`)
   }
-
-  const itemsAndPrices = []
-
-  for (let i = 0; i < l; i++) {
-    let itemAndPrice = cart[i]
-    let item = Object.keys(itemAndPrice)[0]
-    let price = itemAndPrice[item]
-
-    itemsAndPrices.push(`${item} at \$${price}`)
+  if (!cart.length) {
+    return "Your shopping cart is empty."
   }
-
-  console.log(`In your cart, you have ${itemsAndPrices.join(', ')}.`)
+  if (cart.length == 1) {
+    return `In your cart, you have ${cartItems}.`
+  }
+  if (cart.length > 1) {
+    var lastItem = cartItems.splice(cart.length - 1, 1)
+    var midItems = cartItems.join(', ')
+    return `In your cart, you have ${midItems}, and ${lastItem}.`
+  }
 }
+
 
 function removeFromCart(item) {
   let itemInCart = false
