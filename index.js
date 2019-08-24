@@ -1,15 +1,12 @@
-var cart = []
-
+var cart = [];
 function getCart() {
-  return cart
+ return cart;
 }
-
 function setCart(c) {
-  cart = c
+  cart = c;
+  return cart;
 }
-
 function addToCart(item) {
- // write your code here
   var itemName = item
   var itemPrice = Math.floor(Math.random() * 100)
   // key names are assigned in this statement and not declared variables
@@ -17,9 +14,7 @@ function addToCart(item) {
   getCart().push(newItem)
   return `${newItem.itemName} has been added to your cart.`
 }
-
 function viewCart() {
-  // write your code here
   var cartItems = new Array()
   for (var item in cart ) {
     cartItems.push(`${cart[item].itemName} at $${cart[item].itemPrice}`)
@@ -36,43 +31,39 @@ function viewCart() {
     return `In your cart, you have ${midItems}, and ${lastItem}.`
   }
 }
-
+function total() {
+  var totalCartPrice = 0
+  for (var item in cart ) {
+    totalCartPrice += cart[item].itemPrice
+  }
+  return totalCartPrice
+}
 
 function removeFromCart(item) {
-  let itemInCart = false
-
-  for (let i = 0, l = cart.length; i < l; i++) {
-    if (cart[i].hasOwnProperty(item)) {
-      itemInCart = true
-      cart = cart.slice(0, i).concat(cart.slice(i + 1))
+  // write your code here
+  for (var i in cart) {
+    if (cart[i].itemName == item) {
+      cart.splice(i, 1)
+      var itemRemoved = true
     }
   }
-
-  if (!itemInCart) {
-    console.log("That item is not in your cart.")
+  if (itemRemoved) {
+    return cart
+  } else {
+      return "That item is not in your cart."
   }
-
-  return cart
 }
 
 function placeOrder(cardNumber) {
+  // write your code here
   if (!cardNumber) {
-    return console.log("We don't have a credit card on file for you to place your order.")
+    return "Sorry, we don't have a credit card on file for you."
+  } else {
+      var totalCost = 0
+      for (var i in cart) {
+        totalCost += cart[i].itemPrice
+        cart.splice(i, 1)
+      }
+      return `Your total cost is $${totalCost}, which will be charged to the card ${cardNumber}.`
   }
-
-  console.log(`Your total cost is $${total()}, which will be charged to the card ${cardNumber}.`)
-
-  cart = []
-}
-
-function total() {
-  let t = 0
-
-  for (var i = 0, l = cart.length; i < l; i++) {
-    for (var item in cart[i]) {
-      t += cart[i][item]
-    }
-  }
-
-  return t
 }
